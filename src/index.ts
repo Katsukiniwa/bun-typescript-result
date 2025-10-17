@@ -36,12 +36,15 @@ async function main() {
     //   break;
     // }
 
-    case 'deposit': {
+    case "deposit": {
       const acc = accounts.get(Number(argv[1]));
       const amt = parseNumber(argv[2]);
-      if (!acc || !amt) return console.error('usage: deposit <accountId> <amount>');
+      if (!acc || !amt) return console.error("usage: deposit <accountId> <amount>");
       const r = deposit(acc, amt);
-      r.match((t) => console.log(`deposited ${t.amount} to account ${t.toAccountId}`), (e) => console.error('error:', e));
+      r.match(
+        (t) => console.log(`deposited ${t.amount} to account ${t.toAccountId}`),
+        (e) => console.error("error:", e),
+      );
       break;
     }
 
@@ -72,9 +75,10 @@ async function main() {
     //   break;
     // }
 
-    case 'help':
     default:
-      console.log(`Usage: <command> [args]\n\nCommands:\n create-user <name>\n create-merchant <name>\n create-account <userId> [initialDeposit]\n deposit <accountId> <amount>\n withdraw <accountId> <amount>\n transfer <fromAccountId> <toAccountId> <amount>\n show-account <accountId>\n`);
+      console.log(
+        `Usage: <command> [args]\n\nCommands:\n create-user <name>\n create-merchant <name>\n create-account <userId> [initialDeposit]\n deposit <accountId> <amount>\n withdraw <accountId> <amount>\n transfer <fromAccountId> <toAccountId> <amount>\n show-account <accountId>\n`,
+      );
   }
 }
 
@@ -83,7 +87,5 @@ function parseNumber(arg?: string): number | null {
   const n = Number(arg);
   return Number.isFinite(n) ? n : null;
 }
-
-
 
 main().catch((e) => console.error("fatal error", e));

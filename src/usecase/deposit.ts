@@ -1,7 +1,7 @@
+import { err, ok, type Result } from "neverthrow";
 import type { BankAccount } from "../domain/bank-account";
 import { Transaction } from "../domain/transaction";
 import { database, transactions } from "../repository";
-import { err, ok, type Result } from "neverthrow";
 
 export function deposit(account: BankAccount, amount: number): Result<Transaction, string> {
   if (amount <= 0) {
