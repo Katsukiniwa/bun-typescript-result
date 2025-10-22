@@ -1,17 +1,21 @@
-import { ok, type Result, safeTry } from "neverthrow";
+import { ok, safeTry } from "neverthrow";
 import { BankAccount } from "../domain/bank-account";
 import { deposit } from "./deposit";
-import { withdraw } from "./withdraw";
+import { withdrawSimple } from "./withdraw-simple";
 
-export function transfer(fromOwnerId: number, toOwnerId: number): Result<number, string> {
-  return safeTry<number, string>(function* () {
+export function transfer(fromOwnerId: number, toOwnerId: number) {
+  return safeTry(function* () {
+    const from = new BankAccount(1, fromOwnerId)
+    const to = new BankAccount(2, toOwnerId)
+
     return ok(
-      (yield* withdraw(new BankAccount(1, fromOwnerId), 50)
+      (yield* withdrawSimple(from, 100)
         .map((r) => r.balance)
-        .mapErr((e) => `aborted by an error from 2nd function, ${e}`)) +
-        (yield* deposit(new BankAccount(2, toOwnerId), 100)
-          .map((r) => r.amount)
-          .mapErr((e) => `aborted by an error from 1st function, ${e}`)),
+      )
+      +
+      (yield* deposit(to, 100)
+        .map((r) => r.amount)
+      )
     );
   });
 }

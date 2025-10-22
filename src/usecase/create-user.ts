@@ -10,7 +10,7 @@ export const createUser = (name: string | undefined): Result<User, string> => {
     return err("Name must be at least 3 characters");
   }
   database.nextUserId += 1;
-  const u = new User(database.nextUserId, name.trim());
+  const u = new User(database.nextUserId, name.trim(), `${name.trim().toLowerCase()}@example.com`);
   users.set(u.id, u);
 
   return ok(u);

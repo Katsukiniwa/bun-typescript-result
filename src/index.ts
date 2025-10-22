@@ -1,6 +1,7 @@
 import { accounts } from "./repository";
 import { createUser } from "./usecase/create-user";
 import { deposit } from "./usecase/deposit";
+import { GetUsers } from "./usecase/get-users";
 
 async function main() {
   const argv = process.argv.slice(2);
@@ -12,6 +13,15 @@ async function main() {
       const r = createUser(name);
       r.match(
         (u) => console.log(`created user ${u.id} ${u.name}`),
+        (e) => console.error("error:", e),
+      );
+      break;
+    }
+
+    case "get-users": {
+      const r = await GetUsers();
+      r.match(
+        (u) => console.log(u),
         (e) => console.error("error:", e),
       );
       break;
