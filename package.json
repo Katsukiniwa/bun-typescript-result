@@ -10,6 +10,8 @@
     "lint": "biome lint --write .",
     "migrate": "bun run scripts/migrate.ts",
     "repl:db": "bun run scripts/repl.ts",
+    "reset": "bun run scripts/reset.ts",
+    "seed": "bun run scripts/seed.ts",
     "test": "bun test"
   },
   "devDependencies": {
