@@ -5,9 +5,12 @@
   "private": true,
   "scripts": {
     "build": "bun build src/index.ts --outdir=dist",
-    "lint": "bunx biome lint .",
+    "check": "bunx biome check --write .",
     "format": "bunx biome format . --write",
-    "check": "bunx biome check --apply ."
+    "lint": "bunx biome lint --write .",
+    "migrate": "bun run scripts/migrate.ts",
+    "repl:db": "bun run scripts/repl.ts",
+    "test": "bun test"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.6",

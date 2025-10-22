@@ -1,5 +1,13 @@
 # bun-typescript-result
 
+## コマンド
+
+```bash
+bun repl    # DBコンソールに接続
+bun migrate # マイグレーション
+bun lint    # lint
+```
+
 ## 参考記事
 
 [Neverthrow 学習素材](https://chatgpt.com/share/68f0eebe-8380-800e-979d-69166448b4a1)
