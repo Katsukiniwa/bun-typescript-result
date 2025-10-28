@@ -9,7 +9,7 @@ export const seed = (() => {
 
   const insert = db.prepare("INSERT INTO users (name, email) VALUES (?, ?)");
   db.run("BEGIN");
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 10; i++) {
     const name = faker.person.fullName();
     const email = faker.internet.email();
     insert.run(name, email);

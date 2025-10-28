@@ -1,5 +1,7 @@
 import { accounts } from "./repository";
+import { createBankAccount } from "./usecase/create-bank-account";
 import { createUser } from "./usecase/create-user";
+import { createUserWithInitialDeposit } from "./usecase/create-user-with-initial-deposit";
 import { deposit } from "./usecase/deposit";
 import { GetUsers } from "./usecase/get-users";
 
@@ -27,24 +29,26 @@ async function main() {
       break;
     }
 
-    // case 'create-merchant': {
-    //   const name = argv[1];
-    //   const r = createMerchant(name);
-    //   r.match(
-    //     (m) => console.log(`created merchant ${m.id} ${m.name}`),
-    //     (e) => console.error('error:', e)
-    //   );
-    //   break;
-    // }
+    case 'create-bank-account': {
+      const ownerId = argv[1];
+      const r = createBankAccount(Number(ownerId));
+      r.match(
+        (m) => console.log(`created bank account ${m.id} for owner ${m.ownerId}`),
+        (e) => console.error('error:', e)
+      );
+      break;
+    }
 
-    // case 'create-account': {
-    //   const userId = parseNumber(argv[1]);
-    //   const initial = parseNumber(argv[2]) ?? 0;
-    //   if (!userId) return console.error('usage: create-account <userId> [initialDeposit]');
-    //   const r = createAccountForUser(userId, initial);
-    //   r.match((a) => console.log(`created account ${a.id} for user ${a.ownerId}`), (e) => console.error('error:', e));
-    //   break;
-    // }
+    case 'create-user-with-initial-deposit': {
+      const userName = argv[1] || "default-user";
+      const initialDeposit = parseNumber(argv[2]) ?? 0;
+      const r = createUserWithInitialDeposit(userName, initialDeposit);
+      r.match(
+        (m) => console.log(`created user ${m.id}`),
+        (e) => console.error('error:', e)
+      );
+      break;
+    }
 
     case "deposit": {
       const acc = accounts.get(Number(argv[1]));

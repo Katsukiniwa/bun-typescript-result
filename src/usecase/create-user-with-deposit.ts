@@ -1,4 +1,4 @@
-import { createAccountForUser } from "./create-account-for-user";
+import { createBankAccount } from "./create-bank-account";
 import { createUser } from "./create-user";
 import { deposit } from "./deposit";
 
@@ -10,7 +10,7 @@ export function createUserWithDeposit(name: string, initialDeposit: number) {
     return;
   }
 
-  const accountResult = createAccountForUser(userResult.value);
+  const accountResult = createBankAccount(userResult.value.id);
   if (accountResult.isErr()) {
     console.error("❌ アカウント作成失敗:", accountResult.error);
     return;

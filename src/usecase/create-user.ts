@@ -1,6 +1,6 @@
 import { err, ok, type Result } from "neverthrow";
 import { User } from "../domain/user";
-import { database, users } from "../repository";
+import { UserRepository } from "../repository/user";
 
 export const createUser = (name: string | undefined): Result<User, string> => {
   if (!name || name.trim().length === 0) {
@@ -9,9 +9,8 @@ export const createUser = (name: string | undefined): Result<User, string> => {
   if (name.trim().length < 3) {
     return err("Name must be at least 3 characters");
   }
-  database.nextUserId += 1;
-  const u = new User(database.nextUserId, name.trim(), `${name.trim().toLowerCase()}@example.com`);
-  users.set(u.id, u);
+  const u = new User(0, name.trim(), `${name.trim().toLowerCase()}@example.com`);
+  new UserRepository().create(u);
 
   return ok(u);
 };

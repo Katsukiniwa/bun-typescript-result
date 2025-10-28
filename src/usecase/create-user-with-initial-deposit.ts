@@ -1,14 +1,15 @@
 import type { Result } from "neverthrow";
 import type { Transaction } from "../domain/transaction";
-import { createAccountForUser } from "./create-account-for-user";
+import type { ValidationError } from "../errors";
+import { createBankAccount } from "./create-bank-account";
 import { createUser } from "./create-user";
 import { deposit } from "./deposit";
 
 export function createUserWithInitialDeposit(
   name: string,
   initialDeposit: number,
-): Result<Transaction, string> {
+): Result<Transaction, string | ValidationError> {
   return createUser(name)
-    .andThen((user) => createAccountForUser(user))
-    .andThen((account) => deposit(account, initialDeposit));
+    .andThen((user) => createBankAccount(user.id))
+    .andThen((bankAccount) => deposit(bankAccount, initialDeposit));
 }

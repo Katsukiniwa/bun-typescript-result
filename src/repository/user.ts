@@ -9,4 +9,20 @@ export class UserRepository extends BaseRepository {
       raw[2] as string,
     ));
   }
+
+  public create(user: User): User {
+    const newUser = this
+      .db
+      .query(
+        "INSERT INTO users (name, email) VALUES ($name, $email) RETURNING *"
+      )
+      .as(User)
+      .get(user.name, user.email)
+    if (!newUser) {
+      throw new Error("Failed to create user");
+    }
+    console.log(`User created: ${JSON.stringify(newUser)}`);
+
+    return newUser;
+  }
 }
