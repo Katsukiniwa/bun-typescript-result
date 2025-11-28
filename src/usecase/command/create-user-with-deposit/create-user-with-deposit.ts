@@ -16,7 +16,7 @@ export function createUserWithDeposit(name: string, initialDeposit: number) {
     return;
   }
 
-  const depositResult = deposit(accountResult.value, initialDeposit);
+  const depositResult = deposit(accountResult.value.id, initialDeposit);
   if (depositResult.isOk()) {
     console.log("✅ 初回入金成功:", depositResult.value);
   } else if (depositResult.isErr()) {

@@ -1,6 +1,6 @@
 import { fromThrowable } from "neverthrow";
-import type { BankAccount } from "../domain/bank-account";
-import { InsufficientFundsError, ValidationError, WithdrawError } from "../errors";
+import type { BankAccount } from "../../../domain/bank-account";
+import { InsufficientFundsError, ValidationError, WithdrawError } from "../../../errors";
 
 export const withdraw = fromThrowable(
   (account: BankAccount, amount: number) => {
