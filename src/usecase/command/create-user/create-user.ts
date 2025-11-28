@@ -1,6 +1,6 @@
 import { err, ok, type Result } from "neverthrow";
-import { User } from "../domain/user";
-import { UserRepository } from "../repository/user";
+import { User } from "../../../domain/user";
+import { UserRepository } from "../../../repository/user";
 
 export const createUser = (name: string | undefined): Result<User, string> => {
   if (!name || name.trim().length === 0) {

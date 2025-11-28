@@ -2,6 +2,18 @@ import { BankAccount } from "../domain/bank-account";
 import { BaseRepository } from ".";
 
 export class BankAccountRepository extends BaseRepository {
+  public getById(id: number): BankAccount {
+    const result = this.db.query("SELECT * FROM bank_accounts WHERE id = $id").values().map(raw => new BankAccount(
+      raw[0] as number,
+      raw[1] as number,
+    ))[0];
+    if (!result) {
+      throw new Error(`BankAccount with id ${id} not found`);
+    }
+    return result;
+  }
+
+
   public create(bankAccount: BankAccount): BankAccount {
     const newBankAccount = this
       .db

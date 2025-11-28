@@ -1,6 +1,6 @@
 import { fromPromise, type ResultAsync } from "neverthrow";
 
-export function fetchAccountBalance(accountId: number): ResultAsync<number, Error> {
+export function getAccountBalance(accountId: number): ResultAsync<number, Error> {
   return fromPromise(
     command(accountId),
     (e) => new Error(`残高取得エラー: ${(e as Error).message}`),

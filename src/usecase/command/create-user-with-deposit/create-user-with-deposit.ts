@@ -1,6 +1,6 @@
-import { createBankAccount } from "./create-bank-account";
-import { createUser } from "./create-user";
-import { deposit } from "./deposit";
+import { createBankAccount } from "../create-bank-account/create-bank-account";
+import { createUser } from "../create-user/create-user";
+import { deposit } from "../deposit/deposit";
 
 export function createUserWithDeposit(name: string, initialDeposit: number) {
   const userResult = createUser(name);

@@ -1,5 +1,5 @@
-import { createBankAccount } from "./create-bank-account";
-import { createUser } from "./create-user";
+import { createBankAccount } from "../create-bank-account/create-bank-account";
+import { createUser } from "../create-user/create-user";
 
 export function createUserAndAccount(name: string) {
   const result = createUser(name)

@@ -1,6 +1,6 @@
 import { ok } from "neverthrow";
-import { UserRepository } from "../repository/user";
-import { userBatchGenerator } from "../utils";
+import { UserRepository } from "../../../repository/user";
+import { userBatchGenerator } from "../../../utils";
 
 export const GetUsers = async () => {
   const users = new UserRepository().getUsers();

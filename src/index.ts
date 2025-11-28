@@ -1,9 +1,8 @@
-import { accounts } from "./repository";
-import { createBankAccount } from "./usecase/create-bank-account";
-import { createUser } from "./usecase/create-user";
-import { createUserWithInitialDeposit } from "./usecase/create-user-with-initial-deposit";
-import { deposit } from "./usecase/deposit";
-import { GetUsers } from "./usecase/get-users";
+import { createBankAccount } from "./usecase/command/create-bank-account/create-bank-account";
+import { createUser } from "./usecase/command/create-user/create-user";
+import { createUserWithInitialDeposit } from "./usecase/command/create-user-with-initial-deposit/create-user-with-initial-deposit";
+import { deposit } from "./usecase/command/deposit/deposit";
+import { GetUsers } from "./usecase/query/get-users/get-users";
 
 async function main() {
   const argv = process.argv.slice(2);
@@ -51,10 +50,13 @@ async function main() {
     }
 
     case "deposit": {
-      const acc = accounts.get(Number(argv[1]));
+      const accountId = parseNumber(argv[1]);
       const amt = parseNumber(argv[2]);
-      if (!acc || !amt) return console.error("usage: deposit <accountId> <amount>");
-      const r = deposit(acc, amt);
+      if (!amt) {
+        console.error("usage: deposit <accountId> <amount>");
+        return
+      }
+      const r = deposit(accountId, amt);
       r.match(
         (t) => console.log(`deposited ${t.amount} to account ${t.toAccountId}`),
         (e) => console.error("error:", e),
@@ -96,10 +98,12 @@ async function main() {
   }
 }
 
-function parseNumber(arg?: string): number | null {
-  if (!arg) return null;
-  const n = Number(arg);
-  return Number.isFinite(n) ? n : null;
+function parseNumber(arg?: string): number {
+  if (!arg) {
+    throw new Error("argument is required");
+  };
+
+  return Number(arg);
 }
 
 main().catch((e) => console.error("fatal error", e));
