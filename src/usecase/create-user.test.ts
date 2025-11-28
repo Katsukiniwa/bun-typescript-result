@@ -1,15 +1,17 @@
 import { describe, expect, it } from "bun:test";
+import { faker } from "@faker-js/faker";
 import { createUser } from "./create-user";
 
 describe("createUser usecase", () => {
   it("正常にユーザーを作成できる", async () => {
-    const result = createUser("Alice");
+    const userName = faker.person.firstName();
+    const result = createUser(userName);
 
     expect(result.isOk()).toBe(true);
 
     if (result.isOk()) {
       const user = result.value;
-      expect(user.name).toBe("Alice");
+      expect(user.name).toBe(userName);
       expect(typeof user.id).toBe("number");
     }
   });
