@@ -9,7 +9,7 @@
       "devDependencies": {
         "@biomejs/biome": "2.2.6",
         "@faker-js/faker": "^10.1.0",
-        "@tsconfig/bun": "1.0.9",
+        "@tsconfig/bun": "1.0.10",
         "@tsconfig/strictest": "2.0.6",
         "@types/bun": "1.3.0",
       },
@@ -41,7 +41,7 @@
 
     "@rollup/rollup-linux-x64-gnu": ["@rollup/rollup-linux-x64-gnu@4.52.4", "", { "os": "linux", "cpu": "x64" }, "sha512-Wi6AXf0k0L7E2gteNsNHUs7UMwCIhsCTs6+tqQ5GPwVRWMaflqGec4Sd8n6+FNFDw9vGcReqk2KzBDhCa1DLYg=="],
 
-    "@tsconfig/bun": ["@tsconfig/bun@1.0.9", "", {}, "sha512-4M0/Ivfwcpz325z6CwSifOBZYji3DFOEpY6zEUt0+Xi2qRhzwvmqQN9XAHJh3OVvRJuAqVTLU2abdCplvp6mwQ=="],
+    "@tsconfig/bun": ["@tsconfig/bun@1.0.10", "", {}, "sha512-5AV5YknQjNyoYzZ/8NG0dawqew/wH+x7ANiCfCIn29qo0cdbd1EryvFD1k5NSZWLBMOI/fGqMIaxi58GPIP9Cg=="],
 
     "@tsconfig/strictest": ["@tsconfig/strictest@2.0.6", "", {}, "sha512-tPOhmDhIUcDjvpDDYyiUdssP84Eqm7n5KxJe5J3/g+s6xoDIPAf+SIn06dhw7VkhxIvLOnhDDrX7tsqMHNEhDg=="],
 
