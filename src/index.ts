@@ -28,23 +28,23 @@ async function main() {
       break;
     }
 
-    case 'create-bank-account': {
+    case "create-bank-account": {
       const ownerId = argv[1];
       const r = createBankAccount(Number(ownerId));
       r.match(
         (m) => console.log(`created bank account ${m.id} for owner ${m.ownerId}`),
-        (e) => console.error('error:', e)
+        (e) => console.error("error:", e),
       );
       break;
     }
 
-    case 'create-user-with-initial-deposit': {
+    case "create-user-with-initial-deposit": {
       const userName = argv[1] || "default-user";
       const initialDeposit = parseNumber(argv[2]) ?? 0;
       const r = createUserWithInitialDeposit(userName, initialDeposit);
       r.match(
         (m) => console.log(`created user ${m.id}`),
-        (e) => console.error('error:', e)
+        (e) => console.error("error:", e),
       );
       break;
     }
@@ -54,7 +54,7 @@ async function main() {
       const amt = parseNumber(argv[2]);
       if (!amt) {
         console.error("usage: deposit <accountId> <amount>");
-        return
+        return;
       }
       const r = deposit(accountId, amt);
       r.match(
@@ -101,7 +101,7 @@ async function main() {
 function parseNumber(arg?: string): number {
   if (!arg) {
     throw new Error("argument is required");
-  };
+  }
 
   return Number(arg);
 }

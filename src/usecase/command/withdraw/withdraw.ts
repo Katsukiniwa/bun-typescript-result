@@ -14,5 +14,5 @@ export const withdraw = fromThrowable(
     account.balance -= amount;
     return account;
   },
-  (_err) => new WithdrawError('出金処理に失敗しました'),
+  (_err) => new WithdrawError("出金処理に失敗しました"),
 );

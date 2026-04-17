@@ -13,4 +13,4 @@ export const GetUsers = async () => {
   }
 
   return ok("All users processed");
-}
+};

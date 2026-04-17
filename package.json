@@ -25,6 +25,9 @@
     "typescript": "5.9.2"
   },
   "dependencies": {
-    "neverthrow": "^8.2.0"
+    "@praha/byethrow": "^0.11.1",
+    "fp-ts": "^2.16.11",
+    "neverthrow": "^8.2.0",
+    "ts-pattern": "^5.9.0"
   }
 }

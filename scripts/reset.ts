@@ -5,8 +5,8 @@ import { spawnSync } from "bun";
 export const reset = (() => {
   const dbFile = "app.db";
   if (existsSync(dbFile)) {
-    rmSync(dbFile)
-  };
+    rmSync(dbFile);
+  }
   new Database(dbFile);
   const result = spawnSync(["bun", "run", "./scripts/migrate.ts"], {
     stdout: "pipe",
@@ -14,4 +14,4 @@ export const reset = (() => {
   });
 
   console.log("stdout:", new TextDecoder().decode(result.stdout));
-})()
+})();

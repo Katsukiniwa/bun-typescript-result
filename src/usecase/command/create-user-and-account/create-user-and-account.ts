@@ -16,7 +16,7 @@ export function createUserAndAccount(name: string) {
 
   // さらに、成功時にアカウントを作るチェーン例
   const accountResult = createUser(name)
-    .andThen(user => createBankAccount(user.id))
+    .andThen((user) => createBankAccount(user.id))
     .map((account) => `アカウント作成成功: AccountID=${account.id}, OwnerID=${account.ownerId}`)
     .mapErr((errMsg) => `アカウント作成でエラー: ${errMsg}`);
 

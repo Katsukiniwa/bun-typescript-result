@@ -1,10 +1,10 @@
 import { Database } from "bun:sqlite";
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 import { reset } from "./reset";
 
 export const seed = (() => {
   console.log("Seeding database...");
-  reset
+  reset;
   const db = new Database("app.db");
 
   const insert = db.prepare("INSERT INTO users (name, email) VALUES (?, ?)");
@@ -16,4 +16,4 @@ export const seed = (() => {
   }
   db.run("COMMIT");
   console.log("Seeding completed.");
-})()
+})();
