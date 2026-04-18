@@ -1,12 +1,11 @@
-import { type Result } from "neverthrow";
+import { err, ok, type Result } from "neverthrow";
 
 /**
  * 常に失敗Resultを返す
  * @hint err(msg) を返してください
  */
 export const alwaysFail = (msg: string): Result<never, string> => {
-  // TODO: 実装してください
-  throw new Error("TODO: err() を使って実装してください");
+  return err(msg);
 };
 
 /**
@@ -17,8 +16,7 @@ export const failWithCode = (
   code: number,
   message: string,
 ): Result<never, { code: number; message: string }> => {
-  // TODO: 実装してください
-  throw new Error("TODO: err() を使って実装してください");
+  return err({ code, message });
 };
 
 /**
@@ -26,6 +24,9 @@ export const failWithCode = (
  * @hint if で分岐して ok() と err() を使い分けましょう
  */
 export const validatePositive = (n: number): Result<number, string> => {
-  // TODO: 実装してください
-  throw new Error("TODO: ok() / err() を条件分岐して使ってください");
+  if (n > 0) {
+    return ok(n);
+  } else {
+    return err("正の数が必要です");
+  }
 };

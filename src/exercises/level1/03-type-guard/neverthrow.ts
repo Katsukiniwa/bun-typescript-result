@@ -5,8 +5,11 @@ import { type Result } from "neverthrow";
  * @hint result.isOk() で判定できます
  */
 export const getStatus = (result: Result<unknown, unknown>): "ok" | "err" => {
-  // TODO: 実装してください
-  throw new Error("TODO: isOk() / isErr() を使って実装してください");
+  if (result.isOk()) {
+    return "ok";
+  } else {
+    return "err";
+  }
 };
 
 /**
@@ -15,8 +18,11 @@ export const getStatus = (result: Result<unknown, unknown>): "ok" | "err" => {
  * @hint isErr()のブロック内では result.error が使えます
  */
 export const doubleIfOk = (result: Result<number, number>): number => {
-  // TODO: 実装してください
-  throw new Error("TODO: isOk() で型ガードして値を取り出してください");
+  if (result.isOk()) {
+    return result.value * 2;
+  } else {
+    return result.error;
+  }
 };
 
 /**
@@ -26,6 +32,8 @@ export const doubleIfOk = (result: Result<number, number>): number => {
 export const countResults = (
   results: Result<unknown, unknown>[],
 ): { ok: number; err: number } => {
-  // TODO: 実装してください
-  throw new Error("TODO: filter() と isOk() を使って実装してください");
+  return {
+    ok: results.filter((r) => r.isOk()).length,
+    err: results.filter((r) => r.isErr()).length,
+  };
 };

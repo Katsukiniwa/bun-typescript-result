@@ -1,4 +1,4 @@
-import { type Result } from "neverthrow";
+import { err, ok, type Result } from "neverthrow";
 
 /**
  * Errのときdefault値でOkとして回復する
@@ -8,8 +8,7 @@ export const withDefault = (
   result: Result<number, string>,
   defaultValue: number,
 ): Result<number, string> => {
-  // TODO: .orElse() を使って実装してください
-  throw new Error("TODO: .orElse(() => ok(defaultValue)) を試してください");
+  return result.orElse(() => ok(defaultValue))
 };
 
 /**
@@ -20,8 +19,7 @@ export const retryWithFallback = (
   primary: Result<string, string>,
   fallback: Result<string, string>,
 ): Result<string, string> => {
-  // TODO: .orElse() を使って実装してください
-  throw new Error("TODO: primary.orElse(() => fallback) を試してください");
+  return primary.orElse(() => fallback)
 };
 
 /**
@@ -29,6 +27,5 @@ export const retryWithFallback = (
  * @hint .orElse(e => e === "軽微エラー" ? ok(0) : err("重大エラー"))
  */
 export const escalateError = (result: Result<number, string>): Result<number, string> => {
-  // TODO: .orElse() を使って実装してください
-  throw new Error("TODO: .orElse() でエラーを見て分岐してください");
+  return result.orElse((e) => e === "軽微エラー" ? ok(0) : err("重大エラー"))
 };

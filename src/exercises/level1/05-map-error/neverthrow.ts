@@ -8,8 +8,7 @@ export const addErrorPrefix = (
   result: Result<number, string>,
   prefix: string,
 ): Result<number, string> => {
-  // TODO: .mapErr() を使って実装してください
-  throw new Error("TODO: .mapErr() を使って実装してください");
+  return result.mapErr(e => prefix + e)
 };
 
 /**
@@ -17,8 +16,19 @@ export const addErrorPrefix = (
  * @hint .mapErr() の中でswitch/ifを使いましょう
  */
 export const toErrorCode = (result: Result<string, string>): Result<string, number> => {
-  // TODO: .mapErr() を使って実装してください
-  throw new Error("TODO: .mapErr(e => { switch(e) {...} }) を試してみてください");
+  if(result.isOk()) {
+    return result.mapErr(e => Number(e))
+  } else {
+    return result.mapErr(e => {
+      if (e === 'not_found') {
+        return 404
+      } else if (e === 'unauthorized') {
+        return 401
+      } else {
+        return 500
+      }
+    })
+  }
 };
 
 /**
@@ -28,6 +38,5 @@ export const toErrorCode = (result: Result<string, string>): Result<string, numb
 export const wrapInErrorObject = (
   result: Result<string, string>,
 ): Result<string, { message: string; timestamp: number }> => {
-  // TODO: .mapErr() を使って実装してください
-  throw new Error("TODO: .mapErr(e => ({ message: e, timestamp: Date.now() })) を試してみてください");
+  return result.mapErr(e => ({ message: e, timestamp: Date.now() }));
 };

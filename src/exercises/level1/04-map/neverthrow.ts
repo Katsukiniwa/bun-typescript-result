@@ -1,20 +1,18 @@
-import { type Result } from "neverthrow";
+import { err, ok, type Result } from "neverthrow";
 
 /**
  * Resultの数値を2倍にする
  * @hint result.map(n => n * 2) の形で使います
  */
 export const double = (result: Result<number, string>): Result<number, string> => {
-  // TODO: .map() を使って実装してください
-  throw new Error("TODO: .map() を使って実装してください");
+  return result.map(n => n * 2);
 };
 
 /**
  * Resultの文字列を大文字にする
  */
 export const toUpperCase = (result: Result<string, string>): Result<string, string> => {
-  // TODO: .map() を使って実装してください
-  throw new Error("TODO: .map(s => s.toUpperCase()) を試してみてください");
+  return result.map(s => s.toUpperCase());
 };
 
 /**
@@ -25,8 +23,7 @@ export const addPrefix = (
   result: Result<string, string>,
   prefix: string,
 ): Result<string, string> => {
-  // TODO: .map() を使って実装してください
-  throw new Error("TODO: .map() を使って実装してください");
+  return result.map(s => prefix + s);
 };
 
 /**
@@ -37,6 +34,8 @@ export const addPrefix = (
  * @hint Number.isNaN(parseInt("abc")) === true です
  */
 export const parseNumber = (result: Result<string, string>): Result<number, string> => {
-  // TODO: .map() または .andThen() を使って実装してください
-  throw new Error("TODO: 実装してください");
+  return result.andThen((s) => {
+    const n = parseInt(s, 10);
+    return Number.isNaN(n) ? err("数値に変換できません") : ok(n);
+  });
 };
