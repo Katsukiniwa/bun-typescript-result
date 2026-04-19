@@ -6,8 +6,11 @@ import { fromThrowable, type Result } from "neverthrow";
  * @hint fromThrowable は「throwするかもしれない関数」を「Resultを返す関数」に変換します
  */
 export const parseJson = (jsonString: string): Result<unknown, string> => {
-  // TODO: fromThrowable で JSON.parse をラップした関数を作り、jsonString に適用してください
-  throw new Error("TODO: fromThrowable(JSON.parse, errorMapper) を使って実装してください");
+  const safeParseJson = fromThrowable((e: string) =>
+    JSON.parse(e),
+    (e) => String(e)
+  );
+  return safeParseJson(jsonString)
 };
 
 /**
@@ -15,6 +18,14 @@ export const parseJson = (jsonString: string): Result<unknown, string> => {
  * @hint Number(value) がNaNのとき throw する関数を fromThrowable でラップしてください
  */
 export const toNumber = (value: string): Result<number, string> => {
-  // TODO: fromThrowable を使って実装してください
-  throw new Error("TODO: fromThrowable を使って実装してください");
+  const safeToNumber = fromThrowable(
+    (s: string): number => {
+      const n = Number(s);
+      if (Number.isNaN(n) || s.trim() === "") throw new Error("数値に変換できません");
+      return n;
+    }, 
+    () => {
+      return  "数値に変換できません"
+    });
+  return safeToNumber(value)
 };
