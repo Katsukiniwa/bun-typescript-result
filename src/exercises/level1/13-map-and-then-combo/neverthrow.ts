@@ -25,5 +25,13 @@ export const processInput = (input: {
   // ステップ3: andThen で年齢を数値に変換（NaNのときErr）
   // ステップ4: andThen で年齢が0以上かチェック
   // ステップ5: map で { name, age } を作る
-  throw new Error("TODO: map() と andThen() を組み合わせて実装してください");
+  return ok(input.rawName)
+    .map(s => s.trim().toUpperCase())
+    .andThen(s => s.length !== 0 ? ok(s) : err(""))
+    .andThen(name => {
+      const age = Number(input.rawAge);
+      if (Number.isNaN(age)) return err("age は数値にしてください");
+      if (age < 0) return err("age は0以上にしてください");
+      return ok({ name, age });
+    })
 };

@@ -19,15 +19,16 @@ const makeError = (error: InternalError): Result<never, InternalError> => err(er
  * @hint mapErr は Err の中身だけを変換します。Ok はそのまま通過します
  */
 export const toHttpError = (error: InternalError): Result<never, HttpError> => {
-  // TODO: makeError(error).mapErr(e => ...) でエラーを変換してください
-  // NOT_FOUND → 404, UNAUTHORIZED → 401, その他 → 500
-  throw new Error("TODO: .mapErr() を使って実装してください");
+  return makeError(error).mapErr((e) => {
+    const statusCode =
+      e.code === "NOT_FOUND" ? 404 : e.code === "UNAUTHORIZED" ? 401 : 500;
+    return { statusCode, message: e.detail };
+  });
 };
 
 /**
  * InternalError をユーザー向けのメッセージ文字列に変換する
  */
 export const toUserFacingMessage = (error: InternalError): Result<never, string> => {
-  // TODO: makeError(error).mapErr(e => `エラーが発生しました: ${e.detail}`) のように変換してください
-  throw new Error("TODO: .mapErr() を使って実装してください");
+  return makeError(error).mapErr((e) => `エラーが発生しました: ${e.detail}`);
 };

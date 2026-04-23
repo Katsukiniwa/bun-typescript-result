@@ -34,8 +34,11 @@ const validateAge = (age: number): Result<number, ValidationError> => {
 export const validateForm = (
   input: FormInput,
 ): Result<[string, string, number], ValidationError> => {
-  // TODO: Result.combine() を使って3つのバリデーション結果をまとめてください
-  throw new Error("TODO: Result.combine([...]) を使って実装してください");
+  return Result.combine([
+    validateName(input.name),
+    validateEmail(input.email),
+    validateAge(input.age),
+  ])
 };
 
 /**
@@ -45,6 +48,9 @@ export const validateForm = (
 export const validateFormAllErrors = (
   input: FormInput,
 ): Result<[string, string, number], ValidationError[]> => {
-  // TODO: Result.combineWithAllErrors([...]) を使って実装してください
-  throw new Error("TODO: Result.combineWithAllErrors([...]) を使って実装してください");
+  return Result.combineWithAllErrors([
+    validateName(input.name),
+    validateEmail(input.email),
+    validateAge(input.age),
+  ]);
 };

@@ -43,7 +43,9 @@ const validateAge = (age: number): Result<number, ValidationError> => {
  * @hint andThen でResultを返す関数を連鎖するとShort-circuit評価になります
  */
 export const createUser = (input: UserInput): Result<User, ValidationError> => {
-  // TODO: validateName → validateEmail → validateAge の順で andThen で連鎖してください
-  // 全て成功したら ok({ name, email, age }) を返してください
-  throw new Error("TODO: andThen() を使ってバリデーションを連鎖させてください");
+  return validateName(input.name).andThen((name) =>
+    validateEmail(input.email).andThen((email) =>
+      validateAge(input.age).map((age) => ({ name, email, age })),
+    ),
+  );
 };

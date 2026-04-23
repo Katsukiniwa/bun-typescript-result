@@ -11,8 +11,9 @@ type ValidationError = {
  * @hint 条件を満たさない場合は err({ field: "name", message: "..." }) を返す
  */
 export const validateName = (name: string): Result<string, ValidationError> => {
-  // TODO: 空文字のとき、または3文字未満のとき err() を返し、それ以外は ok(name) を返してください
-  throw new Error("TODO: ok() と err() を使って実装してください");
+  if (name.length === 0) return err({ field: "name", message: "名前は必須です" });
+  if (name.length < 3) return err({ field: "name", message: "名前は3文字以上にしてください" });
+  return ok(name);
 };
 
 /**
@@ -20,14 +21,17 @@ export const validateName = (name: string): Result<string, ValidationError> => {
  * @hint "@" が含まれているかチェックしてください
  */
 export const validateEmail = (email: string): Result<string, ValidationError> => {
-  // TODO: email に "@" が含まれていない、または空文字のとき err() を返してください
-  throw new Error("TODO: ok() と err() を使って実装してください");
+  if (email.length === 0) return err({ field: "email", message: "メールアドレスは必須です" });
+  if (!email.includes("@"))
+    return err({ field: "email", message: "メールアドレスの形式が正しくありません" });
+  return ok(email);
 };
 
 /**
  * 年齢のバリデーション（0以上150以下）
  */
 export const validateAge = (age: number): Result<number, ValidationError> => {
-  // TODO: 0未満または150より大きいとき err() を返してください
-  throw new Error("TODO: ok() と err() を使って実装してください");
+  if (age < 0) return err({ field: "age", message: "年齢は0以上にしてください" });
+  if (age > 150) return err({ field: "age", message: "年齢は150以下にしてください" });
+  return ok(age);
 };
